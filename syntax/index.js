@@ -9,19 +9,15 @@ const number2 = new InputField("number", "f2", "f2", "number2: ");
 number2.addToElement(document.body);
 addBreak();
 
-const button = new Button("Calculate");
-button.addToElement(document.body);
-addBreak();
-button.button.addEventListener("click", onClick);
-
 const div = document.createElement("div");
 document.body.appendChild(div);
 
-function onClick(){
-    const calc = new Calculator(number1.value, number2.value, "+");
-    const {result}  = calc.calculate();
-    div.innerText = result;
-}
+const buttonPlus = new Button("Plus", number1, number2, "+", div);
+addBreak();
+const buttonMinus = new Button("Minus", number1, number2, "-", div);
+addBreak();
+const buttonMultiply = new Button("Multiplication", number1, number2, "*", div);
+addBreak();
 
 function addBreak(){
     document.body.appendChild(document.createElement("br"));

@@ -1,3 +1,5 @@
+import {Calculator} from "./functions.js";
+
 class InputField{
     /**
      *  @type {HTMLInputElement}
@@ -41,21 +43,27 @@ class Button{
      * @type {HTMLButtonElement}
      */
     #button
-    constructor(text) {
+    #operation
+
+    constructor(text, inp1, inp2, op, resultDiv) {
         this.#button = document.createElement("button");
         this.#button.innerText = text;
+        this.#operation = op;
+        document.body.appendChild(this.#button);
+        this.#button.addEventListener("click", this.#calc(inp1, inp2, resultDiv));
     }
 
     get button(){
         return this.#button;
     }
 
-    /**
-     * @param {HTMLElement} element
-     * @return {void}
-     */
-    addToElement(element){
-        element.appendChild(this.#button);
+    #calc(num1, num2, resultDiv){
+        return () => {
+                const calc = new Calculator(Number(num1.value), Number(num2.value), this.#operation);
+                const {result}  = calc.calculate();
+                console.log(result);
+                resultDiv.innerText = result;
+            }
     }
 }
 
