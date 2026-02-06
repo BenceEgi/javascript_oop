@@ -1,4 +1,3 @@
-import {Calculator} from "./functions.js";
 import {InputField, Button} from "./elements.js";
 
 const number1 = new InputField("number", "f1", "f1", "number1: ");
@@ -12,11 +11,11 @@ addBreak();
 const div = document.createElement("div");
 document.body.appendChild(div);
 
-const buttonPlus = new Button("Plus", number1, number2, "+", div);
+new Button("Plus", number1, number2, "+", div);
 addBreak();
-const buttonMinus = new Button("Minus", number1, number2, "-", div);
+ new Button("Minus", number1, number2, "-", div);
 addBreak();
-const buttonMultiply = new Button("Multiplication", number1, number2, "*", div);
+new Button("Multiplication", number1, number2, "*", div);
 addBreak();
 
 function addBreak(){

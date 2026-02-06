@@ -9,6 +9,7 @@ class InputField{
      * @type {HTMLLabelElement}
      */
     #label
+
     constructor(type, name, id, labelText){
         this.#field = document.createElement("input");
         this.#field.type = type;
@@ -18,10 +19,6 @@ class InputField{
         this.#label = document.createElement("label");
         this.#label.innerText = labelText;
         this.#label.htmlFor = id;
-    }
-
-    get field(){
-        return this.#field;
     }
 
     get value(){
@@ -51,10 +48,6 @@ class Button{
         this.#operation = op;
         document.body.appendChild(this.#button);
         this.#button.addEventListener("click", this.#calc(inp1, inp2, resultDiv));
-    }
-
-    get button(){
-        return this.#button;
     }
 
     #calc(num1, num2, resultDiv){
