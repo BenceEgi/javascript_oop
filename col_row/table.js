@@ -29,7 +29,7 @@ export class Table{
 
     /**
      *
-     * @param {HeaderArrayType} headerArr
+     * @param {HeaderType[]} headerArr
      * @param {Manager} manager
      */
     constructor(headerArr, manager){
@@ -52,7 +52,7 @@ export class Table{
 
     /**
      *
-     * @param {HeaderArrayType} headerArr
+     * @param {HeaderType[]} headerArr
      */
     #renderHeader(headerArr){
         if (!this.#thead) return
