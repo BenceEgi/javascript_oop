@@ -64,7 +64,7 @@ export class ViewElement{
         if(this.#id == id){
             show(this.#div);
             if (this.#activateCallback)
-                this.#activateCallback()
+                this.#activateCallback();
         }
         else{
             hide(this.#div);

@@ -5,17 +5,17 @@
 
 const formFields = [{
     id: 'author',
-    label: 'Név',
+    label: 'Név: ',
     name: 'author'
 },
 {
     id: 'work',
-    label: 'Mű',
+    label: 'Mű: ',
     name: 'work'
 },
 {
     id: 'concept',
-    label: 'Fogalom',
+    label: 'Fogalom: ',
     name: 'concept'
 }]
 
@@ -30,19 +30,13 @@ const navBar = new NavigationBar();
 navBar.appendTo(document.body);
 
 const manager = new AuthorManager();
-manager.addElement({
-    author: "aaa", 
-    concept: "ccc",
-    work: "www"
-});
 
 const tableView = new TableView('table', headerArray, manager);
 tableView.appendTo(document.body);
 navBar.addViewElement(tableView, 'Tablazat');
 
-const formView = new FormView('form');
+const formView = new FormView('form', formFields, manager);
 formView.appendTo(document.body);
 navBar.addViewElement(formView, 'Form');
 
 navBar.activate('table');
-manager.getAllElement();
