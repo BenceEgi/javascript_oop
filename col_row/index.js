@@ -1,14 +1,15 @@
 /**
  * @import {FormFieldType, HeaderArrayType, ColspanType, RowspanType} from './functions.js'
  */
-import {Manager} from "./manager.js";
-import {Table} from "./table.js";
+import {TableView} from "../author_manager/table_view.js";
 import data from "./data.json" with {type: 'json'};
 import {appendColSpan} from "./functions.js";
-import {FormController} from "./form.js";
+import {FormView} from "../author_manager/form_view.js";
+import {ImportView} from "../author_manager/importexport.js";
+import {AuthorManager} from "../author_manager/author_manager.js";
 
-const manager = new Manager();
-const table = new Table(data.colspanHeaderArray, manager);
+const manager = new AuthorManager();
+const table = new TableView("table", data.colspanHeaderArray, manager);
 table.setAppendRow(appendColSpan)
 
 for (const colType of data.colspanDataArr){
@@ -16,4 +17,5 @@ for (const colType of data.colspanDataArr){
 }
 document.body.appendChild(document.createElement("br"));
 
-const formController = new FormController(data.colspanFormFieldList, manager);
+const formController = new FormView("form", data.colspanFormFieldList, manager);
+const importView = new ImportView("importexport", manager);

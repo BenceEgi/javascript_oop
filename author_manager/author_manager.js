@@ -6,6 +6,10 @@
  * @callback ResultCallback
  * @param {string} message
  * @return {void}
+ *
+ * @callback ImportResultCallback
+ * @param {string} message
+ * @return {void}
  */
 
 export class AuthorManager{
@@ -21,6 +25,12 @@ export class AuthorManager{
      * @type {ResultCallback}
      */
     #addElementResultCallback
+    /**
+     * @type {ImportResultCallback}
+     */
+    #importResultCallback
+
+
 
     constructor(){
         this.#authorList = [];
@@ -33,6 +43,15 @@ export class AuthorManager{
     set addElementResultCallback(callback){
         this.#addElementResultCallback = callback;
     }
+
+    /**
+     *
+     * @param {ResultCallback} callback
+     */
+    set addImportResultCallback(callback){
+        this.#importResultCallback = callback;
+    }
+
 
     /**
      * @param {TableCallback} value
@@ -52,18 +71,51 @@ export class AuthorManager{
         author.concept = element.concept;
         if (author.validate()){
             this.#authorList.push(author)
-            this.#addElementResultCallback("Sikeres eleme felvetel");
+            this.#addElementResultCallback("Sikeres elem felvetel");
         }
         else {
-            this.#addElementResultCallback("Nem volt sikeres eleme felvetel");
+            this.#addElementResultCallback("Nem volt sikeres elem felvetel");
         }
-    } 
+    }
+
+    /**
+     *
+     * @param {import(".").AuthorType[]} elementList
+     */
+    addElementList(elementList){
+        for (const elem of elementList){
+            const author = new Author();
+            author.id = this.#authorList.length;
+            author.name = elem.author;
+            author.work = elem.work
+            author.concept = elem.concept;
+            if (author.validate()){
+                this.#authorList.push(author);
+                this.#importResultCallback("Sikeres import");
+            }
+            else {
+                this.#importResultCallback("Sikertelen import");
+                break;
+            }
+        }
+    }
 
     /**
      * @returns {void}
      */
     getAllElement(){
         this.#tableCallback(this.#authorList);
+    }
+
+    /**
+     * @returns {string}
+     */
+    getExportString(){
+        const result = [];
+        for (const author of this.#authorList){
+            result.push(`${author.name};${author.work};${author.concept}`)
+        }
+        return result.join("\n");
     }
 }
 
